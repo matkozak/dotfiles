@@ -1,0 +1,20 @@
+theme = plaster-dark
+font-family = Fira Code Nerd Font
+background-opacity = 0.85
+background-blur = 16
+
+# typography
+font-size = 16
+font-thicken = true
+font-thicken-strength = 1
+adjust-cell-height = 1
+
+copy-on-select = clipboard
+right-click-action = paste
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+
+# icon from Luke Janicke
+# https://github.com/lukejanicke/ghostty-app-icons/
+macos-icon=custom
+macos-custom-icon=~/.config/ghostty/custom.icns

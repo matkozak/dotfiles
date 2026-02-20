@@ -1,0 +1,36 @@
+# Plaster Dark for Ghostty
+# Author: Mateusz Kozak
+#
+# Warm pastels on neutral grays. High contrast, no tint.
+#
+# 256-color 16 and 231 map to bg/fg so that Neovim can access those values directly.
+
+background = #202020
+foreground = #e7e7e7
+cursor-color = #e7e7e7
+selection-background = #474747
+selection-foreground = #e7e7e7
+
+# 256-color: remap black/white → bg/fg
+palette = 16=#202020
+palette = 231=#e7e7e7
+
+# Normal (0–7)
+palette = 0=#3a3a3a
+palette = 1=#db5154
+palette = 2=#a3c76d
+palette = 3=#dd943b
+palette = 4=#417ddd
+palette = 5=#a773c9
+palette = 6=#69bcde
+palette = 7=#b5b5b5
+
+# Bright (8–15)
+palette = 8=#555555
+palette = 9=#ff7171
+palette = 10=#c3e88d
+palette = 11=#ffb45e
+palette = 12=#5f9dff
+palette = 13=#c792ea
+palette = 14=#89ddff
+palette = 15=#d7d7d7
