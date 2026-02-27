@@ -58,5 +58,9 @@ completions: dirs
     gen uv      uv      uv generate-shell-completion zsh
     echo "Done."
 
+# apply macOS preferences
+macos:
+    sh macos/defaults.sh
+
 # full bootstrap: brew + stow + completions
 bootstrap: brew stow completions
