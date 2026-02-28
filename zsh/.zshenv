@@ -10,7 +10,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # Editor
 export EDITOR="nvim"
 export VISUAL="nvim"
-export LESS="-R -F -X -Q"
+export LESS="-R -F -X"
 export MANPAGER="nvim +Man!"
 
 # Python
