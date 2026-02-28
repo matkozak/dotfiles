@@ -25,3 +25,5 @@ export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
 export FZF_CTRL_T_COMMAND="fd --type f --hidden --exclude .git"
 
+# Claude
+export ENABLE_LSP_TOOL=1
