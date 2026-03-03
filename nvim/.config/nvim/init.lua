@@ -1,87 +1,58 @@
 -- ~/.config/nvim/init.lua
 -- Targeting Neovim 0.11+ (uses vim.pack from 0.12)
 
--- Leader key: prefix for custom mappings. Space is popular because it's easy to hit.
--- Must be set before plugins load so they can reference it.
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- Leader
+vim.g.mapleader = " " -- prefix for custom mappings (set before plugins)
+vim.g.maplocalleader = " " -- buffer-local mapping prefix (used by some plugins)
 
--- Line numbers: absolute on current line, relative on others.
--- Relative makes jump commands (5j, 12k) easier to eyeball.
-vim.opt.number = true
-vim.opt.relativenumber = true
+-- Display
+vim.opt.number = true -- show line numbers
+vim.opt.relativenumber = true -- make them relative to current line
+vim.opt.signcolumn = "yes" -- always show gutter (git signs etc.)
+vim.opt.statuscolumn = "%s%=%l " -- signs first, right-aligned numbers second
+vim.opt.termguicolors = true -- 24-bit color
+vim.opt.cursorline = true -- highlight current line
+vim.opt.list = true -- show whitespace characters
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- map whitespace chars
 
--- Mouse support. Handy for resizing splits, scrolling.
-vim.opt.mouse = "a"
+-- Editing
+vim.opt.mouse = "a" -- mouse support
+vim.opt.clipboard = "unnamedplus" -- use OS clipboard
+vim.opt.undofile = true -- persist undo history across sessions
+vim.opt.breakindent = true -- wrapped lines continue visually indented (when wrap is on)
+vim.opt.completeopt = { "menuone" } -- show menu even for single match, no auto-insert
 
--- System clipboard integration. Yank goes to OS clipboard.
-vim.opt.clipboard = "unnamedplus"
+-- Indentation
+vim.opt.tabstop = 4 -- tab width
+vim.opt.shiftwidth = 4 -- indent width
+vim.opt.expandtab = true -- use spaces
 
--- Always show the sign column (left gutter) so buffer doesn't shift
--- when diagnostics/git signs appear.
-vim.opt.signcolumn = "yes"
+-- Search
+vim.opt.ignorecase = true -- case-insensitive by default
+vim.opt.smartcase = true -- case-sensitive if uppercase used
+vim.opt.hlsearch = true -- highlight matches
+vim.opt.inccommand = "split" -- live preview of :s substitutions
 
--- Status column: signs, then right-aligned line numbers.
--- %=: right-align, %l: line number, %s: sign column (git signs).
-vim.opt.statuscolumn = "%s%=%l "
+-- Splits
+vim.opt.splitright = true -- :vsp right
+vim.opt.splitbelow = true -- :sp down
 
--- Splits open in the direction you'd read: right and down.
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+-- Performance
+vim.opt.updatetime = 250 -- faster CursorHold and swap writes
 
--- Persist undo history across sessions. Saves to ~/.local/state/nvim/undo/
-vim.opt.undofile = true
+-- Keymaps
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- clear search highlight
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]]) -- exit terminal mode
+vim.keymap.set("n", "Q", "<nop>") -- disable ex mode
+vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>") -- C-k up
+vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>") -- C-j down
+vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>") -- C-h left
+vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>") -- C-l right
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- show diagnostic float
 
--- Search: case-insensitive unless you use uppercase.
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Faster CursorHold trigger and swap writes. Affects some plugins.
-vim.opt.updatetime = 250
-
--- 24-bit color. Enable for GUI colorschemes.
-vim.opt.termguicolors = true
-
--- Default indentation (fallback when no editorconfig/ftplugin).
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
--- Show trailing whitespace, tabs, non-breaking spaces.
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
--- Live preview of :s substitutions in a split.
-vim.opt.inccommand = "split"
-
--- Highlight current line.
-vim.opt.cursorline = true
-
--- Clear search highlight with Escape.
-vim.opt.hlsearch = true
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
--- Wrapped lines continue visually indented.
-vim.opt.breakindent = true
-
--- Escape exits terminal mode (default <C-\><C-n> is awkward).
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
-
--- Disable Q (ex mode—useless and easy to hit accidentally).
-vim.keymap.set("n", "Q", "<nop>")
-
--- Navigate splits with Ctrl+hjkl.
-vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>")
-vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>")
-vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>")
-vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>")
-
--- Show diagnostic in float with <leader>e (or whatever)
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-
--- Diagnostic display: severity on line numbers, gutter reserved for git signs.
+-- Diagnostics
 vim.diagnostic.config({
-	severity_sort = true,
+	severity_sort = true, -- errors before warnings
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
@@ -89,14 +60,14 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.INFO] = "",
 			[vim.diagnostic.severity.HINT] = "",
 		},
-		numhl = {
+		numhl = { -- color the line number by severity (gutter left for git signs)
 			[vim.diagnostic.severity.ERROR] = "DiagnosticNumError",
 			[vim.diagnostic.severity.WARN] = "DiagnosticNumWarn",
 			[vim.diagnostic.severity.INFO] = "DiagnosticNumInfo",
 			[vim.diagnostic.severity.HINT] = "DiagnosticNumHint",
 		},
 	},
-	virtual_text = false,
+	virtual_text = false, -- no inline text, signs + numhl are enough
 	underline = true,
 })
 
@@ -109,12 +80,11 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
-	"nvim-treesitter/nvim-treesitter",
 	"HiPhish/rainbow-delimiters.nvim",
-	"ellisonleao/gruvbox.nvim",
 	"ibhagwan/fzf-lua",
 	"lewis6991/gitsigns.nvim",
-	"neovim/nvim-lspconfig", -- still needed for server definitions
+	"neovim/nvim-lspconfig", -- server definitions
+	"nvim-treesitter/nvim-treesitter",
 }, {
 	performance = {
 		rtp = { reset = false }, -- don't mess with runtimepath
@@ -131,8 +101,8 @@ require("nvim-treesitter.configs").setup({
 	highlight = { enable = true },
 })
 
--- LSP servers (0.11+ native config, no lspconfig plugin needed).
--- Binaries must be in PATH: rust-analyzer, ruff, ty
+-- LSP server config
+-- servers must be installed and available in PATH
 vim.lsp.enable({ "rust_analyzer", "ruff", "ty" })
 
 -- LSP keybindings + native completion (only active when LSP attaches).
@@ -155,7 +125,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-vim.opt.completeopt = { "menuone" }
 
 -- Format on save via LSP.
 vim.api.nvim_create_autocmd("BufWritePre", {
