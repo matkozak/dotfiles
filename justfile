@@ -1,6 +1,6 @@
 set shell := ["sh", "-euc"]
 
-packages := "zsh nvim ghostty git editorconfig tmux claude"
+packages := "zsh nvim git editorconfig tmux claude"
 
 xdg_cache_home := env("XDG_CACHE_HOME", home_directory() / ".cache")
 xdg_data_home  := env("XDG_DATA_HOME", home_directory() / ".local/share")
@@ -17,10 +17,6 @@ default:
     mkdir -p "{{ xdg_cache_home }}/zsh"
     mkdir -p "{{ xdg_state_home }}/zsh"
     mkdir -p "{{ zcomp_dir }}"
-
-# install Brewfile packages
-brew:
-    brew bundle --file=Brewfile
 
 # symlink dotfile packages
 stow: dirs
@@ -59,23 +55,6 @@ completions: dirs
     gen uvx     uvx     uvx --generate-shell-completion zsh
     echo "Done."
 
-# enable SSH access
-ssh:
-    sudo systemsetup -setremotelogin on
-    @echo ""
-    @echo "  === Manual: disable password auth ==="
-    @echo "      sudo vi /etc/ssh/sshd_config"
-    @echo "      Set: PasswordAuthentication no"
-    @echo "      Then: sudo launchctl kickstart -k system/com.openssh.sshd"
-    @echo ""
-    @echo "  === Manual: add your public key ==="
-    @echo "      mkdir -p ~/.ssh && cat your_key.pub >> ~/.ssh/authorized_keys"
-    @echo "      chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
-
-# apply macOS preferences
-macos:
-    sh macos/defaults.sh
-
 # install Claude Code plugins (enable/disable is in settings.json)
 claude-plugins:
     #!/bin/sh
@@ -95,5 +74,5 @@ claude-plugins:
     install cloudflare@cloudflare
     echo "Done."
 
-# full bootstrap: brew + stow + completions
-bootstrap: brew stow completions
+# full bootstrap: stow + completions
+bootstrap: stow completions
