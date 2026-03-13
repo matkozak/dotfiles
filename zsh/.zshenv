@@ -16,6 +16,12 @@ export MANPAGER="nvim +Man!"
 # Python
 export PIP_REQUIRE_VIRTUALENV=1
 
+# Azure
+export AZCOPY_AUTO_LOGIN_TYPE=AZCLI
+
+# Corporate CA certs (Windows certs injected into WSL for HTTPS trust)
+export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+
 # Fzf
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
