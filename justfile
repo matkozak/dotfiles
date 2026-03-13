@@ -2,9 +2,9 @@ set shell := ["sh", "-euc"]
 
 packages := "zsh nvim git editorconfig"
 
-xdg_cache_home := env("XDG_CACHE_HOME", env("HOME") /".cache")
-xdg_data_home  := env("XDG_DATA_HOME", env("HOME") /".local/share")
-xdg_state_home := env("XDG_STATE_HOME", env("HOME") /".local/state")
+xdg_cache_home := env("XDG_CACHE_HOME", home_directory() / ".cache")
+xdg_data_home  := env("XDG_DATA_HOME", home_directory() / ".local/share")
+xdg_state_home := env("XDG_STATE_HOME", home_directory() / ".local/state")
 zcomp_dir      := xdg_data_home / "zsh/completions"
 
 # list available recipes
