@@ -78,6 +78,10 @@ zstyle ':completion:*' complete-options true    # complete option flags
 zstyle ':completion:*:*:kill:*' menu yes select # nice menu for kill
 zstyle ':completion:*:kill:*' force-list always
 
+# Azure CLI (bash completion, bridged via bashcompinit)
+autoload -Uz bashcompinit && bashcompinit
+source /etc/bash_completion.d/azure-cli
+
 # Part 6: Key bindings
 #
 bindkey -e # disable vi mode
