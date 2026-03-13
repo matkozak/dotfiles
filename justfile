@@ -1,6 +1,6 @@
 set shell := ["sh", "-euc"]
 
-packages := "zsh nvim ghostty git"
+packages := "zsh nvim git editorconfig"
 
 xdg_cache_home := env("XDG_CACHE_HOME", home_directory() / ".cache")
 xdg_data_home  := env("XDG_DATA_HOME", home_directory() / ".local/share")
@@ -17,10 +17,6 @@ default:
     mkdir -p "{{ xdg_cache_home }}/zsh"
     mkdir -p "{{ xdg_state_home }}/zsh"
     mkdir -p "{{ zcomp_dir }}"
-
-# install Brewfile packages
-brew:
-    brew bundle --file=Brewfile
 
 # symlink dotfile packages
 stow: dirs
@@ -59,9 +55,5 @@ completions: dirs
     gen uvx     uvx     uvx --generate-shell-completion zsh
     echo "Done."
 
-# apply macOS preferences
-macos:
-    sh macos/defaults.sh
-
-# full bootstrap: brew + stow + completions
-bootstrap: brew stow completions
+# full bootstrap: stow + completions
+bootstrap: stow completions

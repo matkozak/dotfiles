@@ -40,7 +40,6 @@ setopt EXTENDED_GLOB         # enable # ~ ^ as glob operators
 #
 typeset -U fpath
 fpath=(
-    "$HOMEBREW_PREFIX/share/zsh/site-functions"
     "$XDG_DATA_HOME/zsh/completions"
     $fpath
 )
@@ -141,5 +140,5 @@ alias reload="source $ZDOTDIR/.zshrc"
 # https://github.com/romkatv/powerlevel10k/issues/1817#issuecomment-2587706854
 () {
   local XDG_CACHE_HOME="$XDG_CACHE_HOME/zsh"
-  source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
+  source "$HOME/.local/share/powerlevel10k/powerlevel10k.zsh-theme"
 }
