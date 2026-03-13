@@ -56,6 +56,7 @@ completions: dirs
     gen mise    mise    mise completion zsh
     gen rustup  rustup  rustup completions zsh
     gen uv      uv      uv generate-shell-completion zsh
+    gen uvx     uvx     uvx --generate-shell-completion zsh
     echo "Done."
 
 # apply macOS preferences

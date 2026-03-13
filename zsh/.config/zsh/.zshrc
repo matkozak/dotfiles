@@ -127,6 +127,9 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
+# python
+alias venv="source .venv/bin/activate"
+
 # reload .zshrc
 alias reload="source $ZDOTDIR/.zshrc"
 
