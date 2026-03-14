@@ -135,7 +135,7 @@ require("nvim-treesitter.configs").setup({
 
 -- LSP server config
 -- servers must be installed and available in PATH
-vim.lsp.enable({ "rust_analyzer", "ruff", "ty" })
+vim.lsp.enable({ "pyright", "ruff", "rust_analyzer", })
 
 -- LSP keybindings + native completion (only active when LSP attaches).
 vim.api.nvim_create_autocmd("LspAttach", {
