@@ -146,9 +146,14 @@ vim.opt.background = "dark"
 vim.cmd.colorscheme("plaster")
 
 -- Treesitter: syntax highlighting via AST parsing.
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "rust", "python", "lua" },
-	highlight = { enable = true },
+require("nvim-treesitter").install({
+	"latex",
+	"lua",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"r",
+	"rust",
 })
 
 -- LSP server config
