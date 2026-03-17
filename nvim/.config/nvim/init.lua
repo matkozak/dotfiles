@@ -61,7 +61,12 @@ vim.keymap.set("v", "<", "<gv") -- stay in visual after dedent
 vim.keymap.set("v", ">", ">gv") -- stay in visual after indent
 vim.keymap.set("n", "<leader>q", "gqip") -- reflow paragraph to text width
 vim.keymap.set("n", "<leader>Q", "gggqG") -- reflow entire document to text width
-vim.api.nvim_create_user_command("Reload", function() vim.cmd("source $MYVIMRC") end, {})
+
+
+--Commands
+vim.api.nvim_create_user_command("Reload", function()
+	vim.cmd("source $MYVIMRC")
+end, {})
 
 -- Diagnostics
 vim.diagnostic.config({
@@ -158,7 +163,7 @@ require("nvim-treesitter").install({
 
 -- LSP server config
 -- servers must be installed and available in PATH
-vim.lsp.enable({ "pyright", "ruff", "rust_analyzer", })
+vim.lsp.enable({ "pyright", "ruff", "rust_analyzer" })
 
 -- LSP keybindings + native completion (only active when LSP attaches).
 vim.api.nvim_create_autocmd("LspAttach", {
