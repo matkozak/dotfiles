@@ -1,0 +1,11 @@
+# This is Git's per-user configuration file.
+[user]
+name = Mateusz Kozak
+email = 19314272+matkozak@users.noreply.github.com
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
