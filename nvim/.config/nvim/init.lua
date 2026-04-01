@@ -62,7 +62,6 @@ vim.keymap.set("v", ">", ">gv") -- stay in visual after indent
 vim.keymap.set("n", "<leader>q", "gqip") -- reflow paragraph to text width
 vim.keymap.set("n", "<leader>Q", "gggqG") -- reflow entire document to text width
 
-
 --Commands
 vim.api.nvim_create_user_command("Reload", function()
 	vim.cmd("source $MYVIMRC")
@@ -113,7 +112,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(ev)
 		local name, kind = ev.data.spec.name, ev.data.kind
 		if name == "nvim-treesitter" and kind == "update" then
-			if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
+			if not ev.data.active then
+				vim.cmd.packadd("nvim-treesitter")
+			end
 			vim.cmd("TSUpdate")
 		end
 	end,
@@ -121,11 +122,11 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 -- Plugins
 vim.pack.add({
-	"https://github.com/HiPhish/rainbow-delimiters.nvim",
-	"https://github.com/ibhagwan/fzf-lua",
-	"https://github.com/lewis6991/gitsigns.nvim",
-	"https://github.com/neovim/nvim-lspconfig",
-	"https://github.com/nvim-treesitter/nvim-treesitter",
+	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim", version = "master" },
+	{ src = "https://github.com/ibhagwan/fzf-lua", version = "main" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim", version = "main" },
+	{ src = "https://github.com/neovim/nvim-lspconfig", version = "master" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
 -- Colorscheme
