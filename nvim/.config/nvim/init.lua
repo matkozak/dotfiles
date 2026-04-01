@@ -1,5 +1,5 @@
 -- ~/.config/nvim/init.lua
--- Targeting Neovim 0.11+ (uses vim.pack from 0.12)
+-- Targeting Neovim 0.12+ (uses vim.pack)
 
 -- Leader
 vim.g.mapleader = " " -- prefix for custom mappings (set before plugins)
@@ -108,42 +108,24 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
-end
-vim.opt.rtp:prepend(lazypath)
+-- Recompile parsers when treesitter is updated
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "nvim-treesitter" and kind == "update" then
+			if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
+			vim.cmd("TSUpdate")
+		end
+	end,
+})
 
 -- Plugins
-require("lazy").setup({
-	checker = { enabled = false }, -- check for updates
-	defaults = {
-		lazy = false,
-		version = false, -- always use the latest git commit
-	},
-	performance = {
-		rtp = {
-			disabled_plugins = {}, -- if there's trouble, this is the way
-		},
-	},
-	spec = {
-		"HiPhish/rainbow-delimiters.nvim",
-		"ibhagwan/fzf-lua",
-		"lewis6991/gitsigns.nvim",
-		"neovim/nvim-lspconfig", -- server definitions
-		{ "nvim-treesitter/nvim-treesitter", lazy = false, build = ":TSUpdate" },
-	},
+vim.pack.add({
+	"https://github.com/HiPhish/rainbow-delimiters.nvim",
+	"https://github.com/ibhagwan/fzf-lua",
+	"https://github.com/lewis6991/gitsigns.nvim",
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
 })
 
 -- Colorscheme
