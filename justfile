@@ -59,6 +59,19 @@ completions: dirs
     gen uvx     uvx     uvx --generate-shell-completion zsh
     echo "Done."
 
+# enable SSH access
+ssh:
+    sudo systemsetup -setremotelogin on
+    @echo ""
+    @echo "  === Manual: disable password auth ==="
+    @echo "      sudo vi /etc/ssh/sshd_config"
+    @echo "      Set: PasswordAuthentication no"
+    @echo "      Then: sudo launchctl kickstart -k system/com.openssh.sshd"
+    @echo ""
+    @echo "  === Manual: add your public key ==="
+    @echo "      mkdir -p ~/.ssh && cat your_key.pub >> ~/.ssh/authorized_keys"
+    @echo "      chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
+
 # apply macOS preferences
 macos:
     sh macos/defaults.sh
