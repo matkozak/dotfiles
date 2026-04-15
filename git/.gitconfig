@@ -8,4 +8,4 @@ email = 19314272+matkozak@users.noreply.github.com
 	defaultBranch = main
 [credential]
 	helper =
-	helper = /usr/local/share/gcm-core/git-credential-manager
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
