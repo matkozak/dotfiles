@@ -133,6 +133,9 @@ alias venv="source .venv/bin/activate"
 # reload .zshrc
 alias reload="source $ZDOTDIR/.zshrc"
 
+# t <session, default: main> for tmux
+t() { tmux new -A -s "${1:-main}"; }
+
 # Part 8: Prompt
 #
 [[ -f "$ZDOTDIR/.p10k.zsh" ]] && source "$ZDOTDIR/.p10k.zsh"
