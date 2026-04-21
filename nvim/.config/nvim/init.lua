@@ -127,6 +127,7 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim", version = "main" },
 	{ src = "https://github.com/neovim/nvim-lspconfig", version = "master" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/stevearc/conform.nvim", version = "master" },
 })
 
 -- Colorscheme
@@ -170,10 +171,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Format on save via LSP.
-vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		-- prettier
+		astro = { "prettierd", "prettier", stop_after_first = true },
+		css = { "prettierd", "prettier", stop_after_first = true },
+		html = { "prettierd", "prettier", stop_after_first = true },
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		json = { "prettierd", "prettier", stop_after_first = true },
+		markdown = { "prettierd", "prettier", stop_after_first = true },
+		svelte = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+		yaml = { "prettierd", "prettier", stop_after_first = true },
+	},
+	default_format_opts = { lsp_format = "fallback" },
+	format_on_save = { timeout_ms = 1000, lsp_format = "fallback" },
 })
 
 -- fzf-lua: fuzzy finder for files, grep, buffers.
