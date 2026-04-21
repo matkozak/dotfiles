@@ -130,6 +130,9 @@ alias rm="rm -i"
 # python
 alias venv="source .venv/bin/activate"
 
+# claude code
+alias claude="claude --allow-dangerously-skip-permissions"
+
 # reload .zshrc
 alias reload="source $ZDOTDIR/.zshrc"
 

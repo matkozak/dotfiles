@@ -1,6 +1,6 @@
 set shell := ["sh", "-euc"]
 
-packages := "zsh nvim ghostty git editorconfig tmux"
+packages := "zsh nvim ghostty git editorconfig tmux claude"
 
 xdg_cache_home := env("XDG_CACHE_HOME", home_directory() / ".cache")
 xdg_data_home  := env("XDG_DATA_HOME", home_directory() / ".local/share")
