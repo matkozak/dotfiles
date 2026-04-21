@@ -71,9 +71,11 @@ defaults write com.apple.dock mru-spaces -bool false
 
 echo "  Hot corners"
 
-# actions: 1=disabled, 2=Mission Control, 3=App Windows, 4=Desktop, 5=Screen Saver,
+# actions:
+#   1=disabled, 2=Mission Control, 3=App Windows, 4=Desktop, 5=Screen Saver,
 #   10=Sleep Display, 11=Launchpad, 13=Lock Screen, 14=Quick Note
-# modifiers: 0=none, 131072=Shift, 262144=Control, 524288=Option, 1048576=Command
+# modifiers:
+#   0=none, 131072=Shift, 262144=Control, 524288=Option, 1048576=Command
 defaults write com.apple.dock wvous-tr-corner -int 2  # Mission Control
 defaults write com.apple.dock wvous-tr-modifier -int 0
 defaults write com.apple.dock wvous-br-corner -int 4  # Desktop
@@ -86,3 +88,12 @@ killall Dock   2>/dev/null || true
 killall Finder 2>/dev/null || true
 
 echo "Done. Some settings require a logout or restart to take effect."
+
+# Manual changes reminder
+#
+echo ""
+echo "Manual steps:"
+echo "  - Disable Ctrl+Space input source shortcut:"
+echo "    System Settings > Keyboard > Keyboard Shortcuts > Input Sources"
+echo "  - Remap modifiers (Ctrl>Cmd>Opt>Ctrl rotation):"
+echo "    System Settings > Keyboard > Keyboard Shortcuts > Modifier Keys"
