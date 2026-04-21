@@ -24,11 +24,11 @@ brew:
 
 # symlink dotfile packages
 stow: dirs
-    stow -v {{ packages }}
+    stow -v --no-folding {{ packages }}
 
 # re-stow (repair symlinks)
 restow: dirs
-    stow -v -R {{ packages }}
+    stow -v --no-folding -R {{ packages }}
 
 # remove symlinks
 unstow:
