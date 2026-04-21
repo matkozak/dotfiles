@@ -7,5 +7,5 @@ email = 19314272+matkozak@users.noreply.github.com
 [init]
 	defaultBranch = main
 [credential]
-	helper = 
+	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
