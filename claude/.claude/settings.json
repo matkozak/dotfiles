@@ -4,15 +4,6 @@
     "pr": ""
   },
   "permissions": {
-    "deny": [
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/.dev.vars)",
-      "Read(**/.dev.vars.*)",
-      "Read(**/secrets.*)",
-      "Read(**/*secret*)",
-      "Read(**/*credentials*)"
-    ],
     "allow": [
       "Bash(ls:*)",
       "Bash(pwd)",
@@ -36,9 +27,18 @@
       "WebFetch(domain:code.claude.com)",
       "WebFetch(domain:docs.claude.com)",
       "WebFetch(domain:docs.anthropic.com)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.dev.vars)",
+      "Read(**/.dev.vars.*)",
+      "Read(**/secrets.*)",
+      "Read(**/*secret*)",
+      "Read(**/*credentials*)"
     ]
   },
-  "model": "opus",
+  "model": "claude-opus-4-6",
   "hooks": {
     "PreToolUse": [
       {
