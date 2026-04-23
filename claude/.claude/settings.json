@@ -1,18 +1,15 @@
 {
+  "env": {
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-6",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-6",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4-5-20251001",
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
   },
   "permissions": {
-    "deny": [
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/.dev.vars)",
-      "Read(**/.dev.vars.*)",
-      "Read(**/secrets.*)",
-      "Read(**/*secret*)",
-      "Read(**/*credentials*)"
-    ],
     "allow": [
       "Bash(ls:*)",
       "Bash(pwd)",
@@ -36,6 +33,15 @@
       "WebFetch(domain:code.claude.com)",
       "WebFetch(domain:docs.claude.com)",
       "WebFetch(domain:docs.anthropic.com)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.dev.vars)",
+      "Read(**/.dev.vars.*)",
+      "Read(**/secrets.*)",
+      "Read(**/*secret*)",
+      "Read(**/*credentials*)"
     ]
   },
   "model": "opus",
@@ -76,9 +82,12 @@
     "command": "sh /Users/kozak/dotfiles/claude/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": false,
+    "rust-analyzer-lsp@claude-plugins-official": false,
+    "typescript-lsp@claude-plugins-official": false,
+    "cloudflare@cloudflare": false
   },
   "skipDangerousModePermissionPrompt": true,
-  "voiceEnabled": true
+  "theme": "dark-ansi",
+  "voiceEnabled": false
 }
