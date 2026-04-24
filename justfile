@@ -76,5 +76,24 @@ ssh:
 macos:
     sh macos/defaults.sh
 
+# install Claude Code plugins (enable/disable is in settings.json)
+claude-plugins:
+    #!/bin/sh
+    set -eu
+    install() {
+        if claude plugin list 2>/dev/null | grep -q "$1"; then
+            echo "  already installed: $1"
+        else
+            claude plugin install "$1"
+            echo "  installed: $1"
+        fi
+    }
+    echo "Installing Claude Code plugins..."
+    install pyright-lsp@claude-plugins-official
+    install rust-analyzer-lsp@claude-plugins-official
+    install typescript-lsp@claude-plugins-official
+    install cloudflare@cloudflare
+    echo "Done."
+
 # full bootstrap: brew + stow + completions
 bootstrap: brew stow completions
