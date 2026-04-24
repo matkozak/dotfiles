@@ -71,6 +71,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "sh /Users/kozak/dotfiles/claude/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true
