@@ -79,7 +79,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "sh /Users/kozak/dotfiles/claude/.claude/statusline-command.sh"
+    "command": "sh $HOME/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": false,

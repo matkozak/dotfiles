@@ -27,7 +27,7 @@ rate_part=""
 five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 five_resets=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 if [ -n "$five_pct" ] && [ -n "$five_resets" ]; then
-    resets_hhmm=$(date -r "$five_resets" +%H:%M 2>/dev/null)
+    resets_hhmm=$(date -d "@$five_resets" +%H:%M 2>/dev/null || date -r "$five_resets" +%H:%M 2>/dev/null)
     rate_part=$(printf " | 5h: %.0f%% (resets %s)" "$five_pct" "$resets_hhmm")
 fi
 
