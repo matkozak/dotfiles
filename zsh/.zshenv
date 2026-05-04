@@ -25,7 +25,9 @@ export PIP_REQUIRE_VIRTUALENV=1
 export AZCOPY_AUTO_LOGIN_TYPE=AZCLI
 
 # Corporate CA certs (Windows certs injected into WSL for HTTPS trust)
-export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" # Python
+export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt" # OpenSSL, rustls
+export NODE_EXTRA_CA_CERTS="/etc/ssl/certs/ca-certificates.crt" # Node
 
 # Fzf
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border"
