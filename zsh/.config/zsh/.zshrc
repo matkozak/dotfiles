@@ -131,7 +131,7 @@ alias rm="rm -i"
 alias venv="source .venv/bin/activate"
 
 # claude code
-alias claude="claude --allow-dangerously-skip-permissions"
+alias claude="claude --allow-dangerously-skip-permissions --system-prompt ''"
 
 # reload .zshrc
 alias reload="source $ZDOTDIR/.zshrc"
