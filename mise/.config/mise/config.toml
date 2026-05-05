@@ -1,5 +1,11 @@
 [tools]
+bat = "latest"
+codex = "latest"
+fd = "latest"
+fzf = "latest"
+just = "latest"
 node = "lts"
 "npm:typescript-language-server" = "latest"
 pnpm = "latest"
 prettier = "latest"
+rg = "latest"
