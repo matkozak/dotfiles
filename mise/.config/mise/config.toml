@@ -1,13 +1,23 @@
 [tools]
+bat = "latest"
+codex = "latest"
+fd = "latest"
+fzf = "latest"
+just = "latest"
 node = "lts"
 "npm:typescript" = "latest"
 lua-language-server = "latest"
 pnpm = "latest"
 prettier = "latest"
+rg = "latest"
 rust = "stable"
 stylua = "latest"
+neovim = "latest"
 "pypi:pyright" = "latest"
 "pypi:ruff" = "latest"
+usage = "latest"
+tree-sitter = "latest"
+uv = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["rust", "node"]
