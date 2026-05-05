@@ -83,10 +83,18 @@
     "command": "sh $HOME/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": false,
-    "rust-analyzer-lsp@claude-plugins-official": false,
-    "typescript-lsp@claude-plugins-official": false,
-    "cloudflare@cloudflare": false
+    "pyright-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "cloudflare@cloudflare": true
+  },
+  "extraKnownMarketplaces": {
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
+      }
+    }
   },
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
