@@ -5,6 +5,7 @@ packages := replace(trim('''
     editorconfig
     ghostty
     git
+    mise
     nvim
     tmux
     zsh

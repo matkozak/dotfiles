@@ -1,0 +1,6 @@
+[tools]
+codex = "latest"
+node = "lts"
+"npm:typescript-language-server" = "latest"
+pnpm = "latest"
+prettier = "latest"
