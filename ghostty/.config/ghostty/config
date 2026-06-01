@@ -18,3 +18,25 @@ clipboard-paste-protection = true
 # https://github.com/lukejanicke/ghostty-app-icons/
 macos-icon=custom
 macos-custom-icon=~/.config/ghostty/custom.icns
+
+# -- Keybindings -----------------------------------------------------------
+
+# Splits
+keybind = cmd+/=new_split:auto
+keybind = cmd+shift+equal=equalize_splits
+
+# Split navigation (vim-style, cmd+h overrides macOS hide)
+keybind = cmd+h=goto_split:left
+keybind = cmd+j=goto_split:bottom
+keybind = cmd+k=goto_split:top
+keybind = cmd+l=goto_split:right
+
+# Split zoom
+keybind = cmd+shift+enter=toggle_split_zoom
+
+# Close current split/tab/window
+keybind = cmd+x=close_surface
+
+# Tab cycling
+keybind = cmd+shift+right_bracket=next_tab
+keybind = cmd+shift+left_bracket=previous_tab
