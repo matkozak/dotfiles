@@ -94,9 +94,6 @@ bindkey '^[[B' down-line-or-search   # Down arrow: search back
 
 # fzf
 source <(fzf --zsh)
-bindkey '^F' fzf-cd-widget           # CTRL-F, prevents shadowing ALT-C (ć)
-
-
 fzf-edit-widget() {
     # open file in nvim
     local file=$(eval "$FZF_DEFAULT_COMMAND" | fzf)
@@ -104,7 +101,12 @@ fzf-edit-widget() {
     zle reset-prompt
 }
 zle -N fzf-edit-widget
-bindkey '^B' fzf-edit-widget
+
+bindkey '^R' fzf-history-widget      # CTRL-R (set by fzf --zsh, listed for visibility)
+bindkey '^T' fzf-file-widget         # CTRL-T (set by fzf --zsh, listed for visibility)
+bindkey '^F' fzf-cd-widget           # CTRL-F, prevents shadowing ALT-C (ć)
+bindkey '^B' fzf-edit-widget         # CRTL-B, find and open file in nvim
+bindkey -r '\ec'                     # unbind fzf's ALT-C (should be dead but leaks via Cmd-C in tmux)
 
 # Part 7: Aliases
 #
