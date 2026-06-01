@@ -11,6 +11,7 @@
     "pr": ""
   },
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       "Bash(ls:*)",
       "Bash(pwd)",
@@ -97,6 +98,7 @@
     }
   },
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "theme": "dark-ansi",
   "voiceEnabled": false
 }
