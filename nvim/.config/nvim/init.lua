@@ -136,13 +136,30 @@ vim.cmd.colorscheme("plaster")
 
 -- Treesitter: syntax highlighting via AST parsing.
 require("nvim-treesitter").install({
+	"astro",
+	"bash",
+	"css",
+	"dockerfile",
+	"gitcommit",
+	"gitignore",
+	"html",
+	"javascript",
+	"json",
 	"latex",
 	"lua",
 	"markdown",
 	"markdown_inline",
 	"python",
 	"r",
+	"regex",
 	"rust",
+	"toml",
+	"tsx",
+	"typescript",
+	"vim",
+	"vimdoc",
+	"yaml",
+	"zig",
 })
 
 -- LSP server config
