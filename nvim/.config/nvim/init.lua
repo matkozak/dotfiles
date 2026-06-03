@@ -48,19 +48,23 @@ vim.opt.updatetime = 250 -- faster CursorHold and swap writes
 vim.opt.swapfile = false -- undofile is enough
 vim.opt.autowrite = true -- auto-save on buffer switch / :make
 
+local function map(mode, lhs, rhs, desc)
+	vim.keymap.set(mode, lhs, rhs, { desc = desc })
+end
+
 -- Keymaps
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- clear search highlight
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]]) -- exit terminal mode
-vim.keymap.set("n", "Q", "<nop>") -- disable ex mode
-vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>") -- C-k up
-vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>") -- C-j down
-vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>") -- C-h left
-vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>") -- C-l right
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- show diagnostic float
-vim.keymap.set("v", "<", "<gv") -- stay in visual after dedent
-vim.keymap.set("v", ">", ">gv") -- stay in visual after indent
-vim.keymap.set("n", "<leader>q", "gqip") -- reflow paragraph to text width
-vim.keymap.set("n", "<leader>Q", "gggqG") -- reflow entire document to text width
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", "Clear search highlight")
+map("t", "<Esc>", [[<C-\><C-n>]], "Exit terminal mode")
+map("n", "Q", "<nop>", "No-op (disables ex mode)")
+map("n", "<C-k>", "<cmd>wincmd k<cr>", "Window up")
+map("n", "<C-j>", "<cmd>wincmd j<cr>", "Window down")
+map("n", "<C-h>", "<cmd>wincmd h<cr>", "Window left")
+map("n", "<C-l>", "<cmd>wincmd l<cr>", "Window right")
+map("n", "<leader>e", vim.diagnostic.open_float, "Line diagnostic")
+map("v", "<", "<gv", "Dedent selection")
+map("v", ">", ">gv", "Indent selection")
+map("n", "<leader>q", "gqip", "Reflow paragraph")
+map("n", "<leader>Q", "gggqG", "Reflow document")
 
 --Commands
 vim.api.nvim_create_user_command("Reload", function()
@@ -123,6 +127,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 -- Plugins
 vim.pack.add({
 	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim", version = "master" },
+	{ src = "https://github.com/folke/which-key.nvim", version = "main" },
 	{ src = "https://github.com/ibhagwan/fzf-lua", version = "main" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim", version = "main" },
 	{ src = "https://github.com/neovim/nvim-lspconfig", version = "master" },
@@ -133,6 +138,24 @@ vim.pack.add({
 -- Colorscheme
 vim.opt.background = "dark"
 vim.cmd.colorscheme("plaster")
+
+-- which-key: make leader mappings discoverable as you type.
+local wk = require("which-key")
+wk.setup({
+	delay = 200,
+	icons = {
+		mappings = false,
+	},
+	win = {
+		border = "rounded",
+	},
+})
+wk.add({
+	{ "<leader>f", group = "find" },
+	{ "<leader>h", group = "hunks" },
+	{ "<leader>l", group = "lsp" },
+	{ "Q", hidden = true },
+})
 
 -- Treesitter: syntax highlighting via AST parsing.
 require("nvim-treesitter").install({
@@ -169,15 +192,50 @@ vim.lsp.enable({ "pyright", "ruff", "rust_analyzer" })
 -- LSP keybindings + native completion (only active when LSP attaches).
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
-		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set("n", "<leader>f", function()
+		local function lsp_map(mode, lhs, rhs, desc)
+			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
+		end
+
+		lsp_map("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<cr>", "Definitions")
+		lsp_map("n", "<leader>lr", "<cmd>FzfLua lsp_references<cr>", "References")
+		lsp_map(
+			"n",
+			"<leader>li",
+			"<cmd>FzfLua lsp_implementations<cr>",
+			"Implementations"
+		)
+		lsp_map("n", "<leader>lt", "<cmd>FzfLua lsp_typedefs<cr>", "Type definitions")
+		lsp_map(
+			"n",
+			"<leader>ls",
+			"<cmd>FzfLua lsp_document_symbols<cr>",
+			"Document symbols"
+		)
+		lsp_map(
+			"n",
+			"<leader>lS",
+			"<cmd>FzfLua lsp_workspace_symbols<cr>",
+			"Workspace symbols"
+		)
+		lsp_map(
+			"n",
+			"<leader>lx",
+			"<cmd>FzfLua diagnostics_document<cr>",
+			"Document diagnostics"
+		)
+		lsp_map(
+			"n",
+			"<leader>lX",
+			"<cmd>FzfLua diagnostics_workspace<cr>",
+			"Workspace diagnostics"
+		)
+		lsp_map("n", "<leader>la", vim.lsp.buf.code_action, "Code action")
+		lsp_map("n", "<leader>ln", vim.lsp.buf.rename, "Rename symbol")
+		lsp_map("n", "<leader>le", vim.diagnostic.open_float, "Line diagnostic")
+		lsp_map("n", "<leader>lq", vim.diagnostic.setqflist, "Diagnostics quickfix")
+		lsp_map("n", "<leader>lf", function()
 			vim.lsp.buf.format({ async = true })
-		end, opts)
+		end, "Format buffer")
 
 		-- Native LSP completion (0.11+). <C-n>/<C-p> to navigate, <C-y> to accept.
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -208,9 +266,13 @@ require("conform").setup({
 
 -- fzf-lua: fuzzy finder for files, grep, buffers.
 require("fzf-lua").setup({})
-vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<cr>")
-vim.keymap.set("n", "<leader>sg", "<cmd>FzfLua live_grep<cr>")
-vim.keymap.set("n", "<leader>sb", "<cmd>FzfLua buffers<cr>")
+map("n", "<leader><leader>", "<cmd>FzfLua files<cr>", "Find files")
+map("n", "<leader>ff", "<cmd>FzfLua files<cr>", "Find files")
+map("n", "<leader>fg", "<cmd>FzfLua live_grep<cr>", "Live grep")
+map("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", "Buffers")
+map("n", "<leader>fh", "<cmd>FzfLua help_tags<cr>", "Help tags")
+map("n", "<leader>fr", "<cmd>FzfLua resume<cr>", "Resume picker")
+map("n", "<leader>fw", "<cmd>FzfLua grep_cword<cr>", "Search word")
 
 -- gitsigns: git gutter + hunk staging.
 require("gitsigns").setup({
@@ -223,13 +285,16 @@ require("gitsigns").setup({
 	},
 	on_attach = function(bufnr)
 		local gs = require("gitsigns")
-		local opts = { buffer = bufnr }
-		vim.keymap.set("n", "]h", gs.next_hunk, opts)
-		vim.keymap.set("n", "[h", gs.prev_hunk, opts)
-		vim.keymap.set("n", "<leader>hs", gs.stage_hunk, opts)
-		vim.keymap.set("n", "<leader>hu", gs.undo_stage_hunk, opts)
-		vim.keymap.set("n", "<leader>hr", gs.reset_hunk, opts)
-		vim.keymap.set("n", "<leader>hp", gs.preview_hunk, opts)
+		local function hunk_map(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
+		end
+
+		hunk_map("]h", gs.next_hunk, "Next hunk")
+		hunk_map("[h", gs.prev_hunk, "Previous hunk")
+		hunk_map("<leader>hs", gs.stage_hunk, "Stage hunk")
+		hunk_map("<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+		hunk_map("<leader>hr", gs.reset_hunk, "Reset hunk")
+		hunk_map("<leader>hp", gs.preview_hunk, "Preview hunk")
 	end,
 })
 
