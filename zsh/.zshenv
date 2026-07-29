@@ -18,6 +18,7 @@ export PIP_REQUIRE_VIRTUALENV=1
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
 
 # Fzf
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border"
