@@ -3,3 +3,7 @@ node = "lts"
 "npm:typescript-language-server" = "latest"
 pnpm = "latest"
 prettier = "latest"
+rust = "stable"
+
+[settings]
+idiomatic_version_file_enable_tools = ["rust", "node"]
