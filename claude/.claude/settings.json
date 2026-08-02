@@ -11,7 +11,6 @@
     "pr": ""
   },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(ls:*)",
       "Bash(pwd)",
@@ -44,7 +43,8 @@
       "Read(**/secrets.*)",
       "Read(**/*secret*)",
       "Read(**/*credentials*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "opus",
   "hooks": {
@@ -99,7 +99,7 @@
   },
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
   "theme": "dark-ansi",
+  "skipAutoPermissionPrompt": true,
   "voiceEnabled": false
 }
