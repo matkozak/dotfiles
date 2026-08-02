@@ -1,0 +1,81 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "agent_buffer_font_size": 15.0,
+  "format_on_save": "on",
+  "agent_servers": {},
+  "proxy": "",
+  "prettier": {
+    "allowed": true,
+  },
+  "bottom_dock_layout": "contained",
+  "buffer_font_weight": 450.0,
+  "colorize_brackets": false,
+  "languages": {
+    "Rust": { "formatter": "language_server", "semantic_tokens": "combined" },
+  },
+  "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "openai-subscribed",
+      "model": "gpt-5.6-sol",
+      "enable_thinking": true,
+      "effort": "low",
+    },
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+    "tree_view": true,
+    "default_width": 300.0,
+  },
+  "outline_panel": {
+    "dock": "left",
+    "default_width": 300.0,
+  },
+  "project_panel": {
+    "dock": "left",
+    "default_width": 300.0,
+  },
+  "collaboration_panel": {
+    "default_width": 300.0,
+    "dock": "right",
+  },
+  "disable_ai": false,
+  "buffer_font_family": "FiraCode Nerd Font",
+  "terminal": {
+    "dock": "right",
+    "font_size": 15.0,
+    "copy_on_select": true,
+  },
+  "base_keymap": "VSCode",
+  "minimap": {
+    "show": "never",
+  },
+  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
+  "show_whitespaces": "none",
+  "wrap_guides": [80],
+  "icon_theme": {
+    "mode": "light",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "vim_mode": true,
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "Plaster Dark",
+  },
+}

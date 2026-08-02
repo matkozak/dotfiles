@@ -8,6 +8,7 @@ packages := replace(trim('''
     mise
     nvim
     tmux
+    zed
     zsh
 '''), "\n", " ")
 
