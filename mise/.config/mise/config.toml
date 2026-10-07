@@ -1,6 +1,7 @@
 [tools]
 node = "lts"
-"npm:typescript-language-server" = "latest"
+"npm:typescript" = "latest"
+lua-language-server = "latest"
 pnpm = "latest"
 prettier = "latest"
 rust = "stable"
