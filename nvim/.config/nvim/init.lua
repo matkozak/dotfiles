@@ -25,7 +25,7 @@ vim.opt.clipboard = "unnamedplus" -- use OS clipboard
 vim.opt.undofile = true -- persist undo history across sessions
 vim.opt.breakindent = true -- wrapped lines continue visually indented (when wrap is on)
 vim.opt.linebreak = true -- wrap at word boundaries (when wrap is on)
-vim.opt.completeopt = { "menuone" } -- show menu even for single match, no auto-insert
+vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" } -- nothing auto-inserted, docs popup, fuzzy filter
 
 -- Indentation
 vim.opt.tabstop = 4 -- tab width
@@ -187,7 +187,16 @@ require("nvim-treesitter").install({
 
 -- LSP server config
 -- servers must be installed and available in PATH
-vim.lsp.enable({ "pyright", "ruff", "rust_analyzer" })
+vim.lsp.config("tsgo", { cmd = { "tsc", "--lsp", "--stdio" } }) -- TS 7 ships the Go server as tsc
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			runtime = { version = "LuaJIT" },
+			workspace = { library = { vim.env.VIMRUNTIME }, checkThirdParty = false },
+		},
+	},
+})
+vim.lsp.enable({ "lua_ls", "pyright", "ruff", "rust_analyzer", "tsgo" })
 
 -- LSP keybindings + native completion (only active when LSP attaches).
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -237,13 +246,45 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.buf.format({ async = true })
 		end, "Format buffer")
 
-		-- Native LSP completion (0.11+). <C-n>/<C-p> to navigate, <C-y> to accept.
+		-- Native LSP completion, triggered manually with <Tab> (see below).
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		if client and client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
 		end
 	end,
 })
+
+-- Completion keys, fish-style: <Tab> after a word completes, elsewhere it's a <Tab>.
+vim.keymap.set("i", "<Tab>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-n>"
+	elseif vim.snippet.active({ direction = 1 }) then
+		return "<Cmd>lua vim.snippet.jump(1)<CR>"
+	end
+	local col = vim.fn.col(".") - 1
+	if not vim.fn.getline("."):sub(col, col):match("[%w_.:]") then
+		return "<Tab>"
+	elseif next(vim.lsp.get_clients({ bufnr = 0, method = "textDocument/completion" })) then
+		return "<Cmd>lua vim.lsp.completion.get()<CR>"
+	end
+	return "<C-n>" -- no LSP: buffer words
+end, { expr = true, desc = "Complete / next item / snippet jump / tab" })
+
+vim.keymap.set("i", "<S-Tab>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-p>"
+	elseif vim.snippet.active({ direction = -1 }) then
+		return "<Cmd>lua vim.snippet.jump(-1)<CR>"
+	end
+	return "<S-Tab>"
+end, { expr = true, desc = "Previous item / snippet jump back" })
+
+vim.keymap.set("i", "<CR>", function()
+	if vim.fn.pumvisible() == 0 then
+		return "<CR>"
+	end
+	return vim.fn.complete_info({ "selected" }).selected ~= -1 and "<C-y>" or "<C-e><CR>"
+end, { expr = true, desc = "Accept selected item / newline" })
 
 -- Format on save via LSP.
 require("conform").setup({
