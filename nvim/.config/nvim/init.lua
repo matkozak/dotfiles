@@ -157,6 +157,13 @@ wk.add({
 })
 
 -- Treesitter: syntax highlighting via AST parsing.
+-- nvim-treesitter (main) only installs parsers; highlighting must be started
+-- per buffer. Without this, only Lua/Markdown/help get TS (via built-in ftplugins).
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(ev)
+		pcall(vim.treesitter.start, ev.buf) -- no-op when no parser is installed
+	end,
+})
 require("nvim-treesitter").install({
 	"astro",
 	"bash",
