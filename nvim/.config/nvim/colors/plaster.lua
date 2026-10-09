@@ -1,10 +1,7 @@
 vim.cmd("hi clear")
 vim.g.colors_name = "plaster"
 
-if vim.o.termguicolors then
-	vim.notify("ansibaster: disabling termguicolors (16-color theme)", vim.log.levels.INFO)
-	vim.opt.termguicolors = false
-end
+vim.o.termguicolors = false -- ANSI-only: colors come from the terminal palette
 
 local function hi(group, opts)
 	vim.api.nvim_set_hl(0, group, opts)
@@ -114,6 +111,8 @@ hi("Pmenu", { ctermbg = ui.bg1 })
 hi("PmenuSel", { ctermbg = ui.bg2, bold = true })
 hi("PmenuKind", { ctermfg = syntax.definition, ctermbg = ui.bg1 })
 hi("PmenuKindSel", { ctermfg = syntax.definition, ctermbg = ui.bg2, bold = true })
+hi("PmenuMatch", { ctermbg = ui.bg1, underline = true }) -- fuzzy-matched chars
+hi("PmenuMatchSel", { ctermbg = ui.bg2, bold = true, underline = true })
 hi("PmenuSbar", { ctermbg = ui.bg2 })
 hi("PmenuThumb", { ctermbg = ui.fg2 })
 
@@ -235,6 +234,7 @@ hi("@comment.todo", { ctermfg = ui.bg1, ctermbg = syntax.constant })
 -- Strings
 hi("@character", { ctermfg = syntax.string })
 hi("@string", { ctermfg = syntax.string })
+hi("@string.documentation", { link = "@comment" }) -- docstrings read as docs, like /// and ---
 hi("@string.escape", { ctermfg = syntax.special })
 hi("@string.regexp", { ctermfg = syntax.special })
 hi("@string.special", { ctermfg = syntax.special })
@@ -348,6 +348,12 @@ vim.g.rainbow_delimiters = {
 		"RainbowDelimiterRed",
 	},
 }
+hi("RainbowDelimiterBlue", { ctermfg = "blue" })
+hi("RainbowDelimiterYellow", { ctermfg = "yellow" })
+hi("RainbowDelimiterCyan", { ctermfg = "cyan" })
+hi("RainbowDelimiterViolet", { ctermfg = "magenta" })
+hi("RainbowDelimiterGreen", { ctermfg = "green" })
+hi("RainbowDelimiterRed", { ctermfg = "red" })
 
 -- =========
 -- Markup ==

@@ -10,7 +10,6 @@ vim.opt.number = true -- show line numbers
 vim.opt.relativenumber = true -- make them relative to current line
 vim.opt.signcolumn = "yes" -- always show gutter (git signs etc.)
 vim.opt.statuscolumn = "%s%=%l " -- signs first, right-aligned numbers second
-vim.opt.termguicolors = true -- 24-bit color
 vim.opt.cursorline = true -- highlight current line
 vim.opt.scrolloff = 10 -- keep cursor away from top/bottom edges
 vim.opt.sidescrolloff = 8 -- keep cursor away from left/right edges
