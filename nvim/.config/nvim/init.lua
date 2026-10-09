@@ -238,6 +238,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			"<cmd>FzfLua diagnostics_workspace<cr>",
 			"Workspace diagnostics"
 		)
+		lsp_map("n", "<leader>lh", vim.lsp.buf.hover, "Hover docs")
+		lsp_map("n", "<leader>lk", vim.lsp.buf.signature_help, "Signature help")
 		lsp_map("n", "<leader>la", vim.lsp.buf.code_action, "Code action")
 		lsp_map("n", "<leader>ln", vim.lsp.buf.rename, "Rename symbol")
 		lsp_map("n", "<leader>le", vim.diagnostic.open_float, "Line diagnostic")
