@@ -97,6 +97,7 @@
       }
     }
   },
+  "autoUpdatesChannel": "stable",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
