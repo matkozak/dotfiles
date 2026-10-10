@@ -9,15 +9,15 @@ end
 
 -- semantic aliases
 -- ANSI 16-color palette plus terminal bg/fg
--- TODO: consider switching fg value
--- based on dark / light mode (16 for light).
+-- fg = 231: cterm has no way to name the terminal's default fg (NONE only
+-- leaves the colour unset), so the terminal theme must remap 231 to its fg.
 local syntax = {
 	fg = 231,
 	string = "green",
 	constant = "yellow",
 	comment = "red",
 	definition = "blue",
-	punct = "gray",
+	punct = 7,
 	special = "cyan",
 }
 
@@ -25,7 +25,7 @@ local diag = {
 	error = "darkred",
 	warning = "darkyellow",
 	info = "darkcyan",
-	hint = "gray",
+	hint = 7,
 }
 
 local git = {
@@ -38,11 +38,11 @@ local ui = {
 	-- bg levels: NONE (default) < black (0) < bright black (8)
 	bg0 = "NONE",
 	bg1 = "black",
-	bg2 = "darkgray",
+	bg2 = 8,
 	-- fg levels: NONE (default) > bright white (15) > white (7)
 	fg0 = "NONE",
 	fg1 = "white",
-	fg2 = "gray",
+	fg2 = 7,
 	accent = "magenta",
 	search = "darkcyan",
 	search_active = "darkblue",
