@@ -338,10 +338,9 @@ require("gitsigns").setup({
 			vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
 		end
 
-		hunk_map("]h", gs.next_hunk, "Next hunk")
-		hunk_map("[h", gs.prev_hunk, "Previous hunk")
-		hunk_map("<leader>hs", gs.stage_hunk, "Stage hunk")
-		hunk_map("<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+		hunk_map("]h", function() gs.nav_hunk("next") end, "Next hunk")
+		hunk_map("[h", function() gs.nav_hunk("prev") end, "Previous hunk")
+		hunk_map("<leader>hs", gs.stage_hunk, "Stage/unstage hunk")
 		hunk_map("<leader>hr", gs.reset_hunk, "Reset hunk")
 		hunk_map("<leader>hp", gs.preview_hunk, "Preview hunk")
 	end,
