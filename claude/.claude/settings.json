@@ -43,12 +43,20 @@
       "Read(**/.dev.vars.*)",
       "Read(**/secrets.*)",
       "Read(**/*secret*)",
-      "Read(**/*credentials*)"
+      "Read(**/*credentials*)",
+      "SendFeedback"
     ],
     "defaultMode": "auto"
   },
   "model": "opus",
   "disableClaudeAiConnectors": true,
+  "skillOverrides": {
+    "claude-api": "name-only",
+    "dataviz": "user-invocable-only",
+    "plugin-authoring": "user-invocable-only",
+    "claude-in-chrome": "user-invocable-only",
+    "schedule": "user-invocable-only"
+  },
   "hooks": {
     "PreToolUse": [
       {
