@@ -7,6 +7,7 @@ packages := replace(trim('''
     git
     mise
     nvim
+    rex
     tmux
     zed
     zsh
