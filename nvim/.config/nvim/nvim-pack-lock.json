@@ -5,6 +5,11 @@
       "src": "https://github.com/stevearc/conform.nvim",
       "version": "'master'"
     },
+    "csvview.nvim": {
+      "rev": "f190de76d2eca0380ddcb2425cd582d740699b55",
+      "src": "https://github.com/hat0uma/csvview.nvim",
+      "version": "'main'"
+    },
     "fzf-lua": {
       "rev": "507dfc85551ff2d9293ec215f10f19395252aada",
       "src": "https://github.com/ibhagwan/fzf-lua",

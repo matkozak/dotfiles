@@ -127,6 +127,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
 	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim", version = "master" },
 	{ src = "https://github.com/folke/which-key.nvim", version = "main" },
+	{ src = "https://github.com/hat0uma/csvview.nvim", version = "main" },
 	{ src = "https://github.com/ibhagwan/fzf-lua", version = "main" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim", version = "main" },
 	{ src = "https://github.com/neovim/nvim-lspconfig", version = "master" },
@@ -321,6 +322,24 @@ map("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", "Buffers")
 map("n", "<leader>fh", "<cmd>FzfLua help_tags<cr>", "Help tags")
 map("n", "<leader>fr", "<cmd>FzfLua resume<cr>", "Resume picker")
 map("n", "<leader>fw", "<cmd>FzfLua grep_cword<cr>", "Search word")
+
+-- csvview: aligned columns via virtual text (file on disk is untouched).
+require("csvview").setup({
+	view = { display_mode = "border" },
+	keymaps = {
+		textobject_field_inner = { "if", mode = { "o", "x" } },
+		textobject_field_outer = { "af", mode = { "o", "x" } },
+		jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+		jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+	},
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "csv", "tsv" },
+	callback = function(ev)
+		require("csvview").enable(ev.buf)
+		vim.keymap.set("n", "<leader>t", "<cmd>CsvViewToggle<cr>", { buffer = ev.buf, desc = "Toggle CSV view" })
+	end,
+})
 
 -- gitsigns: git gutter + hunk staging.
 require("gitsigns").setup({
