@@ -193,7 +193,6 @@ require("nvim-treesitter").install({
 
 -- LSP server config
 -- servers must be installed and available in PATH
-vim.lsp.config("tsgo", { cmd = { "tsc", "--lsp", "--stdio" } }) -- TS 7 ships the Go server as tsc
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
@@ -202,7 +201,7 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
-vim.lsp.enable({ "lua_ls", "pyright", "ruff", "rust_analyzer", "tsgo" })
+vim.lsp.enable({ "lua_ls", "pyright", "ruff", "rust_analyzer", "tsc" })
 
 -- LSP keybindings + native completion (only active when LSP attaches).
 vim.api.nvim_create_autocmd("LspAttach", {
