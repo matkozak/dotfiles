@@ -68,6 +68,8 @@ completions: dirs
     gen rustup  rustup  rustup completions zsh
     gen uv      uv      uv generate-shell-completion zsh
     gen uvx     uvx     uvx --generate-shell-completion zsh
+    # drop the compinit cache so the next shell picks up new completions
+    rm -f "{{ xdg_cache_home }}/zsh"/zcompdump-*
     echo "Done."
 
 # enable SSH access

@@ -52,6 +52,8 @@ local zcompdump="$XDG_CACHE_HOME/zsh/zcompdump-${HOST}-${ZSH_VERSION}"
 
 if [[ -n "$zcompdump"(#qN.mh+24) ]]; then
     compinit -d "$zcompdump"
+    # compinit only rewrites the dump when completions changed; keep it fresh
+    touch "$zcompdump"
 else
     compinit -C -d "$zcompdump"
 fi
