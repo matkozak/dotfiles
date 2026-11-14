@@ -45,6 +45,10 @@ restow: dirs
 unstow:
     stow -v -D {{ packages }}
 
+# install mise-managed tools (needs the stowed config)
+mise:
+    mise install
+
 # generate shell completions
 completions: dirs
     #!/bin/sh
@@ -85,9 +89,18 @@ ssh:
     @echo "      mkdir -p ~/.ssh && cat your_key.pub >> ~/.ssh/authorized_keys"
     @echo "      chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 
+# set the machine name everywhere (pins $HOST across networks)
+hostname name:
+    sudo scutil --set ComputerName "{{ name }}"
+    sudo scutil --set LocalHostName "{{ name }}"
+    sudo scutil --set HostName "{{ name }}"
+
 # apply macOS preferences
 macos:
     sh macos/defaults.sh
 
-# full bootstrap: brew + stow + completions
-bootstrap: brew stow completions
+# full bootstrap: brew + stow + mise tools + completions + macOS preferences
+bootstrap: brew stow mise
+    # mise tools aren't on PATH until the next login shell
+    mise exec -- just completions
+    just macos
