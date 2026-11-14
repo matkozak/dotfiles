@@ -7,7 +7,6 @@ prettier = "latest"
 rust = "stable"
 "cargo:rustlings" = "latest"
 "cargo:stylua" = "latest"
-"pypi:ocrmypdf" = "latest"
 "pypi:pyright" = "latest"
 "pypi:ruff" = "latest"
 
