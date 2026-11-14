@@ -13,7 +13,7 @@ echo "  Dock"
 
 defaults write com.apple.dock orientation -string "left"
 defaults write com.apple.dock autohide -bool false
-defaults write com.apple.dock tilesize -int 60
+defaults write com.apple.dock tilesize -int 48
 defaults write com.apple.dock show-recents -bool false
 
 # Finder
@@ -26,6 +26,8 @@ defaults write com.apple.finder AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+# empty Trash items after 30 days
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # Trackpad
 #
@@ -61,6 +63,15 @@ echo "  Keyboard"
 defaults write NSGlobalDomain KeyRepeat -int 5
 # Initial repeat delay (lower = shorter; 68 is macOS default)
 defaults write NSGlobalDomain InitialKeyRepeat -int 30
+# Globe/fn key: 0=do nothing, 1=change input source, 2=emoji & symbols, 3=dictation
+defaults write com.apple.HIToolbox AppleFnUsageType -int 0
+
+# Power
+#
+echo "  Power (needs sudo)"
+
+# never sleep on the power adapter, so the machine stays reachable remotely
+sudo pmset -c sleep 0
 
 # Mission Control
 #
