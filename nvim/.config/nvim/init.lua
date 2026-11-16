@@ -272,7 +272,9 @@ vim.keymap.set("i", "<Tab>", function()
 	local col = vim.fn.col(".") - 1
 	if not vim.fn.getline("."):sub(col, col):match("[%w_.:]") then
 		return "<Tab>"
-	elseif next(vim.lsp.get_clients({ bufnr = 0, method = "textDocument/completion" })) then
+	elseif
+		next(vim.lsp.get_clients({ bufnr = 0, method = "textDocument/completion" }))
+	then
 		return "<Cmd>lua vim.lsp.completion.get()<CR>"
 	end
 	return "<C-n>" -- no LSP: buffer words
@@ -291,7 +293,8 @@ vim.keymap.set("i", "<CR>", function()
 	if vim.fn.pumvisible() == 0 then
 		return "<CR>"
 	end
-	return vim.fn.complete_info({ "selected" }).selected ~= -1 and "<C-y>" or "<C-e><CR>"
+	return vim.fn.complete_info({ "selected" }).selected ~= -1 and "<C-y>"
+		or "<C-e><CR>"
 end, { expr = true, desc = "Accept selected item / newline" })
 
 -- Format on save via LSP.
@@ -337,7 +340,12 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "csv", "tsv" },
 	callback = function(ev)
 		require("csvview").enable(ev.buf)
-		vim.keymap.set("n", "<leader>t", "<cmd>CsvViewToggle<cr>", { buffer = ev.buf, desc = "Toggle CSV view" })
+		vim.keymap.set(
+			"n",
+			"<leader>t",
+			"<cmd>CsvViewToggle<cr>",
+			{ buffer = ev.buf, desc = "Toggle CSV view" }
+		)
 	end,
 })
 
@@ -356,8 +364,12 @@ require("gitsigns").setup({
 			vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
 		end
 
-		hunk_map("]h", function() gs.nav_hunk("next") end, "Next hunk")
-		hunk_map("[h", function() gs.nav_hunk("prev") end, "Previous hunk")
+		hunk_map("]h", function()
+			gs.nav_hunk("next")
+		end, "Next hunk")
+		hunk_map("[h", function()
+			gs.nav_hunk("prev")
+		end, "Previous hunk")
 		hunk_map("<leader>hs", gs.stage_hunk, "Stage/unstage hunk")
 		hunk_map("<leader>hr", gs.reset_hunk, "Reset hunk")
 		hunk_map("<leader>hp", gs.preview_hunk, "Preview hunk")

@@ -360,7 +360,17 @@ hi("RainbowDelimiterRed", { ctermfg = "red" })
 -- =============
 
 -- Same palette and order as rainbow delimiters.
-for i, color in ipairs({ "blue", "yellow", "cyan", "magenta", "green", "red", "blue", "yellow", "cyan" }) do
+for i, color in ipairs({
+	"blue",
+	"yellow",
+	"cyan",
+	"magenta",
+	"green",
+	"red",
+	"blue",
+	"yellow",
+	"cyan",
+}) do
 	hi("CsvViewCol" .. (i - 1), { ctermfg = color })
 end
 hi("CsvViewHeaderLine", { bold = true })
