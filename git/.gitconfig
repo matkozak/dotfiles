@@ -6,8 +6,10 @@ email = 19314272+matkozak@users.noreply.github.com
 	editor = nvim
 [init]
 	defaultBranch = main
-[credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+# GitHub auth comes from gh; other hosts use the system default helper
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
