@@ -30,6 +30,7 @@ default:
     mkdir -p "{{ zcomp_dir }}"
 
 # install Brewfile packages
+[macos, group('macos')]
 brew:
     brew bundle --file=Brewfile
 
@@ -77,6 +78,7 @@ completions: dirs
     echo "Done."
 
 # enable SSH access
+[macos, group('macos')]
 ssh:
     sudo systemsetup -setremotelogin on
     @echo ""
@@ -90,16 +92,19 @@ ssh:
     @echo "      chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 
 # set the machine name everywhere (pins $HOST across networks)
+[macos, group('macos')]
 hostname name:
     sudo scutil --set ComputerName "{{ name }}"
     sudo scutil --set LocalHostName "{{ name }}"
     sudo scutil --set HostName "{{ name }}"
 
 # apply macOS preferences
+[macos, group('macos')]
 macos:
     sh macos/defaults.sh
 
 # full bootstrap: brew + stow + mise tools + completions + macOS preferences
+[macos, group('macos')]
 bootstrap: brew stow mise
     # mise tools aren't on PATH until the next login shell
     mise exec -- just completions
