@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 -- Soft wrap + spell for prose filetypes (gitcommit handled by ftplugin)
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "markdown", "text" },
+	pattern = { "markdown", "rmd", "quarto", "text" },
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
@@ -160,6 +160,8 @@ wk.add({
 -- Treesitter: syntax highlighting via AST parsing.
 -- nvim-treesitter (main) only installs parsers; highlighting must be started
 -- per buffer. Without this, only Lua/Markdown/help get TS (via built-in ftplugins).
+-- R Markdown / Quarto have no parser of their own; markdown injects R chunks.
+vim.treesitter.language.register("markdown", { "rmd", "quarto" })
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ev)
 		pcall(vim.treesitter.start, ev.buf) -- no-op when no parser is installed
