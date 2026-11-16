@@ -1,0 +1,11 @@
+# apt packages for Linux bootstrap (mise comes from ppa:jdxcode/mise)
+build-essential
+curl
+gh
+git
+jq
+mise
+stow
+tmux
+trash-cli
+zsh
