@@ -7,6 +7,10 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+# Debian/Ubuntu
+export skip_global_compinit=1 # Prevent /etc/zsh/zshrc from calling compinit
+export DEBIAN_PREVENT_KEYBOARD_CHANGES=yes # Don't break arrow history search
+
 # Editor
 export EDITOR="nvim"
 export VISUAL="nvim"
