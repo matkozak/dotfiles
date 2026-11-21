@@ -42,4 +42,4 @@ the `justfile`.
 ## Before wiping a machine
 
 - Commit and push this repo
-- Review `brew leaves` and `brew list --cask` against the Brewfile
+- Review `brew leaves` and `brew list --cask` against `macos/Brewfile`

@@ -32,7 +32,7 @@ default:
 # install Brewfile packages
 [macos, group('macos')]
 brew:
-    brew bundle --file=Brewfile
+    brew bundle --file=macos/Brewfile
 
 # symlink dotfile packages
 stow: dirs
@@ -109,3 +109,9 @@ bootstrap: brew stow mise
     # mise tools aren't on PATH until the next login shell
     mise exec -- just completions
     just macos
+
+# full bootstrap: stow + mise tools + completions
+[linux]
+bootstrap: stow mise
+    # mise tools aren't on PATH until the next login shell
+    mise exec -- just completions

@@ -1,0 +1,12 @@
+# apt packages for Linux bootstrap (mise comes from its own repo via extrepo)
+build-essential
+curl
+gh
+git
+jq
+just
+mise
+stow
+tmux
+trash-cli
+zsh

@@ -151,5 +151,6 @@ t() { tmux new -A -s "${1:-main}"; }
 # https://github.com/romkatv/powerlevel10k/issues/1817#issuecomment-2587706854
 () {
   local XDG_CACHE_HOME="$XDG_CACHE_HOME/zsh"
-  source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
+  # Homebrew on macOS, a git clone on Linux (see bootstrap.sh)
+  source "${HOMEBREW_PREFIX:-$HOME/.local}/share/powerlevel10k/powerlevel10k.zsh-theme"
 }
