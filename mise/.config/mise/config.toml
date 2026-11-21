@@ -23,3 +23,6 @@ uv = { version = "latest", os = ["linux"] }
 [settings]
 idiomatic_version_file_enable_tools = ["rust", "node"]
 minimum_release_age = "7d"
+# rust tracks rustup's stable channel, which is already vetted; with the delay
+# mise up installs a pinned toolchain that mise prune then removes
+minimum_release_age_excludes = ["rust"]
