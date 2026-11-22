@@ -11,13 +11,13 @@ stylua = "latest"
 
 # Homebrew provides these on macOS (see macos/Brewfile)
 bat = { version = "latest", os = ["linux"] }
+claude-code = { version = "latest", os = ["linux"] }
 codex = { version = "latest", os = ["linux"] }
 fd = { version = "latest", os = ["linux"] }
 fzf = { version = "latest", os = ["linux"] }
 neovim = { version = "latest", os = ["linux"] }
 rg = { version = "latest", os = ["linux"] }
 tree-sitter = { version = "latest", os = ["linux"] }
-usage = { version = "latest", os = ["linux"] }
 uv = { version = "latest", os = ["linux"] }
 
 [settings]
