@@ -1,5 +1,6 @@
-# apt packages for Linux bootstrap (mise comes from its own repo via extrepo)
+# apt packages for Linux bootstrap (mise via extrepo, claude-code via linux/claude-code.sources)
 build-essential
+claude-code
 curl
 gh
 git

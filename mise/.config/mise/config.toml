@@ -11,7 +11,6 @@ stylua = "latest"
 
 # Homebrew provides these on macOS (see macos/Brewfile)
 bat = { version = "latest", os = ["linux"] }
-claude-code = { version = "latest", os = ["linux"] }
 codex = { version = "latest", os = ["linux"] }
 fd = { version = "latest", os = ["linux"] }
 fzf = { version = "latest", os = ["linux"] }

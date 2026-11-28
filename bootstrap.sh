@@ -20,6 +20,8 @@ if [ "$(uname)" = Darwin ]; then
     # Hand off to justfile
     just bootstrap
 else
+    # Claude Code's apt repo (signing key pinned in the file)
+    sudo install -m 0644 linux/claude-code.sources /etc/apt/sources.list.d/
     sudo apt-get update
 
     # mise isn't in the Debian/Ubuntu archives; enable its apt repo once
